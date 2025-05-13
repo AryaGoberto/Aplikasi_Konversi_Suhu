@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">codeerrrr</string>
+    <string-array name="suhu_array">
+        <item>Celcius (C)</item>
+        <item>Kelvin (K)</item>
+        <item>Fahrenheit (F)</item>
+        <item>Reamur (R)</item>
+    </string-array>
+
+    <string name="masukkan_suhu">Masukkan Suhu</string>
+    <string name="aplikasi_konversi_suhu">Aplikasi Konversi Suhu</string>">
 </resources>
