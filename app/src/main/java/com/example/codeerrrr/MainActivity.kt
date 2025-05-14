@@ -33,31 +33,49 @@ class MainActivity : AppCompatActivity() {
         //daftar units yang telah dibuat
         val units = resources.getStringArray(R.array.suhu_array)
         val adapterUnit = ArrayAdapter(this, android.R.layout.simple_spinner_item, units)
+
         adapterUnit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerFrom.adapter = adapterUnit
         spinnerTo.adapter = adapterUnit
 
         buttonHasil.setOnClickListener{
-            val input = inputSuhu.text.toString().toDoubleOrNull()
+            val input = inputSuhu.text.toString().toDouble()
             val from = spinnerFrom.selectedItem.toString()
             val to = spinnerTo.selectedItem.toString()
 
             if(input == null){
-                resultText.text = "Masukkan suhu yang valid"
+                resultText.text = "Enter a valid temperature"
                 return@setOnClickListener
             }
 
             val hasil = when{
+                from == "Celcius (C)" && to == "Celcius (C)" -> input
                 from == "Celcius (C)" && to == "Kelvin (K)" -> input + 273
                 from == "Celcius (C)" && to == "Fahrenheit (F)" -> input * 9/5 + 32
                 from == "Celcius (C)" && to == "Reamur (R)" -> input * 4/5
+
+                from == "Reamur (R)" && to == "Reamur (R)" -> input
+                from == "Reamur (R)" && to == "Celcius (C)" -> input * 5/4
+                from == "Reamur (R)" && to == "Kelvin (K)" -> (input * 5/4) + 273
+                from == "Reamur (R)" && to == "Fahrenheit (F)" -> (input * 9/4) + 32
+
+                from == "Fahrenheit (F)" && to == "Fahrenheit (F)" -> input
+                from == "Fahrenheit (F)" && to == "Celcius (C)" -> (input - 32) * 5/9
+                from == "Fahrenheit (F)" && to == "Kelvin (K)" -> (input - 32) * 5/9 + 273
+                from == "Fahrenheit (F)" && to == "Reamur (R)" -> (input - 32) * 4/9
+
+                from == "Kelvin (K)" && to == "Kelvin (K)" -> input
+                from == "Kelvin (K)" && to == "Celcius (C)" -> input - 273
+                from == "Kelvin (K)" && to == "Fahrenheit (F)" -> (input - 273) * 9/5 + 32
+                from == "Kelvin (K)" && to == "Reamur (R)" -> (input - 273) * 4/5
+
                 else -> {null}
             }
             if(input !=null){
                 val satuan = to.substringAfter("(").substringBefore(")")
-                resultText.text = "Hasil konversi: %.2f %s".format(hasil, satuan)
+                resultText.text = "Conversion result: %.2f %s".format(hasil, satuan)
             } else{
-                resultText.text = "Konversi dari $from ke $to belum didukung."
+                resultText.text = "Conversion from $from to $to is not yet supported."
             }
         }
     }
