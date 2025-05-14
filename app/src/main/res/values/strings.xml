@@ -7,8 +7,9 @@
         <item>Reamur (R)</item>
     </string-array>
 
-    <string name="masukkan_suhu">Masukkan Suhu</string>
-    <string name="aplikasi_konversi_suhu">Aplikasi Konversi Suhu</string>
-    <string name="kalkulasi">Kalkulasi</string>
-    <string name="hasil">Hasil</string>">
+    <string name="masukkan_suhu">Enter Temperature</string>
+    <string name="aplikasi_konversi_suhu">Temperature Conversion Application</string>
+    <string name="kalkulasi">Calculate</string>
+    <string name="hasil">Result</string>
+
 </resources>
